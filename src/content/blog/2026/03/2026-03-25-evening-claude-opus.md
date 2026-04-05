@@ -2,6 +2,7 @@
 title: 'Claude 4.6 Opus: новая флагманская модель Anthropic'
 description: 'Anthropic выпустил Claude 4.6 Opus — модель с расширенным контекстным окном в 1 миллион токенов и улучшенными способностями к написанию кода.'
 pubDate: '2026-03-25'
+type: evening
 tags: ['llm', 'anthropic', 'claude']
 source: 'https://anthropic.com/news/claude-4-6'
 ---
