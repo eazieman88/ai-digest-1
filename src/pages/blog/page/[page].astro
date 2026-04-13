@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import FilterBar from '../../../components/FilterBar.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import PostGrid from '../../../components/PostGrid.astro';
+import SearchBar from '../../../components/SearchBar.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
+
+const PAGE_SIZE = 10;
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const totalPages = Math.ceil(posts.length / 10);
+	// Generate pages 2, 3, 4... (page 1 is blog/index.astro)
+	return [...Array(Math.max(0, totalPages - 1))].map((_, i) => ({
+		params: { page: String(i + 2) },
+	}));
+}
+
+const pageNum = parseInt(Astro.params.page!);
+const allPosts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
+const posts = allPosts.slice((pageNum - 1) * PAGE_SIZE, pageNum * PAGE_SIZE);
+const allTags = [...new Set(allPosts.flatMap((p) => p.data.tags))].sort();
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<BaseHead title={`Блог — стр. ${pageNum} — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 960px;
+			}
+			.pagination {
+				display: flex;
+				justify-content: center;
+				gap: 1rem;
+				margin-top: 2rem;
+				padding: 1rem 0;
+			}
+			.pagination a, .pagination span {
+				padding: 0.4rem 0.8rem;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 6px;
+				text-decoration: none;
+				color: rgb(var(--gray));
+				font-size: 0.9rem;
+			}
+			.pagination a:hover {
+				border-color: rgb(var(--accent));
+				color: rgb(var(--accent));
+			}
+			.pagination .current {
+				background: rgb(var(--accent));
+				border-color: rgb(var(--accent));
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section>
+				<SearchBar />
+				<FilterBar tags={allTags} />
+				<PostGrid posts={posts} />
+				<nav class="pagination">
+					{pageNum > 1 && (
+						<a href={pageNum === 2 ? '/blog/' : `/blog/page/${pageNum - 1}/`}>← Назад</a>
+					)}
+					<a href="/blog/">1</a>
+					{[...Array(totalPages - 1)].map((_, i) => {
+						const num = i + 2;
+						return num === pageNum
+							? <span class="current">{num}</span>
+							: <a href={`/blog/page/${num}/`}>{num}</a>;
+					})}
+					{pageNum < totalPages && (
+						<a href={`/blog/page/${pageNum + 1}/`}>Вперёд →</a>
+					)}
+				</nav>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

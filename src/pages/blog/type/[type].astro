@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import FilterBar from '../../../components/FilterBar.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import PostGrid from '../../../components/PostGrid.astro';
+import { SITE_TITLE } from '../../../consts';
+
+const typeLabels: Record<string, string> = {
+	morning: '☕ Утренние выпуски',
+	evening: '🔥 Вечерние выпуски',
+	weekly: '📊 Недельные обзоры',
+};
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+	return ['morning', 'evening', 'weekly'].map((type) => ({
+		params: { type },
+		props: {
+			posts: posts
+				.filter((p) => p.data.type === type)
+				.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+			allTags,
+		},
+	}));
+}
+
+const { type } = Astro.params;
+const { posts, allTags } = Astro.props;
+const label = typeLabels[type!] || type;
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<BaseHead title={`${label} — ${SITE_TITLE}`} description={`${label} дайджеста Биржевой Дэнди`} />
+		<style>
+			main {
+				width: 960px;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section>
+				<h1>{label}</h1>
+				<FilterBar tags={allTags} activeType={type} />
+				<PostGrid posts={posts} />
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

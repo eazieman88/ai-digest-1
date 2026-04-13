@@ -1,0 +1,212 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import SearchBar from '../components/SearchBar.astro';
+import { SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const searchData = [
+	...posts.map((post) => {
+		const slug = post.id.includes('/') ? post.id.split('/').pop() : post.id;
+		return {
+			type: 'post',
+			url: `/blog/${slug}/`,
+			title: post.data.title,
+			description: post.data.description,
+			tags: post.data.tags.join(', '),
+		};
+	}),
+	{ type: 'glossary', url: '/glossary/#order-flow', title: 'Order Flow', description: 'Анализ потока ордеров — кто покупает и продаёт в реальном времени.' },
+	{ type: 'glossary', url: '/glossary/#order-flow', title: 'Delta', description: 'Разница между объёмом покупок и продаж по рыночным ордерам.' },
+	{ type: 'glossary', url: '/glossary/#order-flow', title: 'Footprint Chart', description: 'Тип графика, показывающий объём покупок и продаж внутри каждой свечи.' },
+	{ type: 'glossary', url: '/glossary/#order-flow', title: 'Volume Profile', description: 'Горизонтальная гистограмма объёмов по ценовым уровням.' },
+	{ type: 'glossary', url: '/glossary/#order-flow', title: 'POC (Point of Control)', description: 'Ценовой уровень с максимальным объёмом торгов в профиле.' },
+	{ type: 'glossary', url: '/glossary/#order-flow', title: 'Imbalance', description: 'Значительное преобладание покупок над продажами на конкретном уровне.' },
+	{ type: 'glossary', url: '/glossary/#order-flow', title: 'ATAS', description: 'Advanced Trading Analytical Software — платформа для order flow анализа.' },
+	{ type: 'glossary', url: '/glossary/#order-flow', title: 'Открытый интерес (OI)', description: 'Количество открытых фьючерсных или опционных контрактов.' },
+	{ type: 'glossary', url: '/glossary/#markets', title: 'ES (E-mini S&P 500)', description: 'Фьючерс на индекс S&P 500 на CME. Самый ликвидный фьючерсный контракт.' },
+	{ type: 'glossary', url: '/glossary/#markets', title: 'NQ (E-mini Nasdaq 100)', description: 'Фьючерс на технологический индекс Nasdaq 100.' },
+	{ type: 'glossary', url: '/glossary/#markets', title: 'CL (Crude Oil)', description: 'Фьючерс на нефть WTI на NYMEX.' },
+	{ type: 'glossary', url: '/glossary/#markets', title: 'GC (Gold)', description: 'Фьючерс на золото на COMEX. Защитный актив.' },
+	{ type: 'glossary', url: '/glossary/#markets', title: 'COT (Commitments of Traders)', description: 'Еженедельный отчёт CFTC о позициях участников фьючерсного рынка.' },
+	{ type: 'glossary', url: '/glossary/#markets', title: 'Контанго', description: 'Ситуация, когда цена фьючерса выше спотовой цены.' },
+	{ type: 'glossary', url: '/glossary/#markets', title: 'Бэквордейшн', description: 'Обратная контанго ситуация — фьючерс дешевле спота.' },
+	{ type: 'glossary', url: '/glossary/#macro', title: 'ФРС (Federal Reserve)', description: 'Центральный банк США. Решения по ставке — главные драйверы рынков.' },
+	{ type: 'glossary', url: '/glossary/#macro', title: 'Ключевая ставка ЦБ РФ', description: 'Процентная ставка Банка России.' },
+	{ type: 'glossary', url: '/glossary/#macro', title: 'CPI (Consumer Price Index)', description: 'Индекс потребительских цен — основной показатель инфляции.' },
+	{ type: 'glossary', url: '/glossary/#macro', title: 'NFP (Non-Farm Payrolls)', description: 'Число новых рабочих мест в несельскохозяйственном секторе США.' },
+	{ type: 'glossary', url: '/glossary/#macro', title: 'PMI (Purchasing Managers Index)', description: 'Индекс деловой активности. Выше 50 — расширение, ниже 50 — сокращение.' },
+	{ type: 'glossary', url: '/glossary/#macro', title: 'CME FedWatch', description: 'Рыночные ожидания по решениям ФРС на основе цен фьючерсов.' },
+	{ type: 'glossary', url: '/glossary/#crypto', title: 'Funding Rate', description: 'Периодический платёж между лонгами и шортами на бессрочных фьючерсах.' },
+	{ type: 'glossary', url: '/glossary/#crypto', title: 'MVRV', description: 'Отношение рыночной капитализации к реализованной стоимости.' },
+	{ type: 'glossary', url: '/glossary/#crypto', title: 'Exchange Flows', description: 'Движение монет на биржи и с бирж.' },
+	{ type: 'glossary', url: '/glossary/#crypto', title: 'Max Pain', description: 'Цена, при которой наибольшее количество опционов истекает бесполезными.' },
+	{ type: 'glossary', url: '/glossary/#sentiment', title: 'Fear & Greed Index', description: 'Индекс страха и жадности (CNN для акций, Alternative.me для крипты).' },
+	{ type: 'glossary', url: '/glossary/#sentiment', title: 'VIX', description: 'Индекс волатильности S&P 500, «индекс страха».' },
+	{ type: 'glossary', url: '/glossary/#sentiment', title: 'Put/Call Ratio', description: 'Соотношение объёма пут-опционов к колл-опционам.' },
+	{ type: 'glossary', url: '/glossary/#sentiment', title: 'DXY (Dollar Index)', description: 'Индекс доллара США против корзины из 6 валют.' },
+];
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<BaseHead title={`Поиск — ${SITE_TITLE}`} description="Поиск по статьям и глоссарию Биржевого Дэнди" />
+		<style>
+			main {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+			}
+			h1 {
+				margin-bottom: 1.5rem;
+			}
+			#search-results {
+				list-style: none;
+				padding: 0;
+				margin: 1.5rem 0 0;
+			}
+			.result-item {
+				padding: 0.8rem 0;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.result-header {
+				display: flex;
+				align-items: baseline;
+				gap: 0.5rem;
+			}
+			.result-badge {
+				font-size: 0.75rem;
+				padding: 0.15rem 0.4rem;
+				border-radius: 4px;
+				background: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+				flex-shrink: 0;
+			}
+			.result-title a {
+				text-decoration: none;
+				color: rgb(var(--black));
+				font-weight: 600;
+			}
+			.result-title a:hover {
+				color: rgb(var(--accent));
+			}
+			.result-description {
+				margin: 0.25rem 0 0;
+				font-size: 0.9rem;
+				color: rgb(var(--gray));
+				line-height: 1.4;
+			}
+			.result-tags {
+				margin-top: 0.2rem;
+				font-size: 0.8rem;
+				color: rgb(var(--gray));
+			}
+			#no-results {
+				color: rgb(var(--gray));
+				margin-top: 2rem;
+				display: none;
+			}
+			#results-count {
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+				margin-top: 0.5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Поиск</h1>
+			<SearchBar />
+			<p id="results-count"></p>
+			<ul id="search-results"></ul>
+			<p id="no-results">Ничего не найдено</p>
+		</main>
+		<Footer />
+
+		<script type="application/json" id="search-data">{JSON.stringify(searchData)}</script>
+
+		<script>
+			const data: { type: string; url: string; title: string; description: string; tags?: string }[] =
+				JSON.parse(document.getElementById('search-data')!.textContent!);
+			const input = document.getElementById('search-input') as HTMLInputElement;
+			const resultsList = document.getElementById('search-results')!;
+			const noResults = document.getElementById('no-results')!;
+			const resultsCount = document.getElementById('results-count')!;
+
+			function truncate(s: string, max: number): string {
+				return s.length > max ? s.slice(0, max) + '…' : s;
+			}
+
+			function search(query: string) {
+				const q = query.toLowerCase().trim();
+				resultsList.innerHTML = '';
+
+				if (!q) {
+					noResults.style.display = 'none';
+					resultsCount.textContent = '';
+					return;
+				}
+
+				const matches = data.filter(
+					(item) =>
+						item.title.toLowerCase().includes(q) ||
+						item.description.toLowerCase().includes(q) ||
+						(item.tags || '').toLowerCase().includes(q),
+				);
+
+				// Group: posts first, then glossary
+				const posts = matches.filter((m) => m.type === 'post');
+				const glossary = matches.filter((m) => m.type === 'glossary');
+				const sorted = [...posts, ...glossary];
+
+				if (sorted.length === 0) {
+					noResults.style.display = 'block';
+					resultsCount.textContent = '';
+					return;
+				}
+
+				noResults.style.display = 'none';
+				resultsCount.textContent = `Найдено: ${sorted.length}`;
+
+				for (const item of sorted) {
+					const li = document.createElement('li');
+					li.className = 'result-item';
+
+					const badge = item.type === 'post' ? '📄 Статья' : '📖 Глоссарий';
+					const tagsHtml = item.tags ? `<p class="result-tags">${item.tags}</p>` : '';
+
+					li.innerHTML = `
+						<div class="result-header">
+							<span class="result-badge">${badge}</span>
+							<span class="result-title"><a href="${item.url}">${item.title}</a></span>
+						</div>
+						<p class="result-description">${truncate(item.description, 120)}</p>
+						${tagsHtml}
+					`;
+					resultsList.appendChild(li);
+				}
+			}
+
+			// Listen to SearchBar input
+			if (input) {
+				input.addEventListener('input', () => search(input.value));
+			}
+
+			// Support ?q= parameter
+			const params = new URLSearchParams(window.location.search);
+			const q = params.get('q');
+			if (q && input) {
+				input.value = q;
+				search(q);
+			}
+		</script>
+	</body>
+</html>

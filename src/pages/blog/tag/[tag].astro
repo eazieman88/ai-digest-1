@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import FilterBar from '../../../components/FilterBar.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import PostGrid from '../../../components/PostGrid.astro';
+import { SITE_TITLE } from '../../../consts';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+	return tags.map((tag) => ({
+		params: { tag },
+		props: {
+			posts: posts
+				.filter((p) => p.data.tags.includes(tag))
+				.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+			allTags: [...new Set(posts.flatMap((p) => p.data.tags))].sort(),
+		},
+	}));
+}
+
+const { tag } = Astro.params;
+const { posts, allTags } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<BaseHead title={`#${tag} — ${SITE_TITLE}`} description={`Посты с тегом ${tag}`} />
+		<style>
+			main {
+				width: 960px;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section>
+				<h1>#{tag}</h1>
+				<FilterBar tags={allTags} activeTag={tag} />
+				<PostGrid posts={posts} />
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

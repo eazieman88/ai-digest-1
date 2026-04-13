@@ -1,0 +1,80 @@
+---
+interface Props {
+	tags: string[];
+	activeType?: string;
+	activeTag?: string;
+}
+
+const { tags, activeType, activeTag } = Astro.props;
+
+const types = [
+	{ slug: 'morning', label: '☕ Утро' },
+	{ slug: 'evening', label: '🔥 Вечер' },
+	{ slug: 'weekly', label: '📊 Неделя' },
+];
+---
+
+<nav class="filter-bar">
+	<div class="filter-types">
+		<a href="/blog/" class:list={[{ active: !activeType && !activeTag }]}>Все</a>
+		{types.map((t) => (
+			<a href={`/blog/type/${t.slug}/`} class:list={[{ active: activeType === t.slug }]}>{t.label}</a>
+		))}
+	</div>
+	{tags.length > 0 && (
+		<div class="filter-tags">
+			{tags.map((tag) => (
+				<a href={`/blog/tag/${tag}/`} class:list={['tag', { active: activeTag === tag }]}>#{tag}</a>
+			))}
+		</div>
+	)}
+</nav>
+
+<style>
+	.filter-bar {
+		margin-bottom: 2rem;
+	}
+	.filter-types {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 0.75rem;
+	}
+	.filter-types a {
+		padding: 0.4rem 0.8rem;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 6px;
+		text-decoration: none;
+		color: rgb(var(--gray));
+		font-size: 0.9rem;
+		transition: 0.2s ease;
+	}
+	.filter-types a:hover {
+		border-color: rgb(var(--accent));
+		color: rgb(var(--accent));
+	}
+	.filter-types a.active {
+		background: rgb(var(--accent));
+		border-color: rgb(var(--accent));
+		color: white;
+	}
+	.filter-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+	.tag {
+		padding: 0.2rem 0.5rem;
+		font-size: 0.8rem;
+		color: rgb(var(--gray));
+		text-decoration: none;
+		transition: 0.2s ease;
+	}
+	.tag:hover {
+		color: rgb(var(--accent));
+	}
+	.tag.active {
+		color: rgb(var(--accent));
+		font-weight: bold;
+	}
+</style>

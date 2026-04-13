@@ -1,0 +1,114 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const typeLabels: Record<string, string> = {
+	morning: '☕',
+	evening: '🔥',
+	weekly: '📊',
+};
+
+// Group by month
+const grouped = new Map<string, typeof posts>();
+for (const post of posts) {
+	const d = post.data.pubDate;
+	const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+	if (!grouped.has(key)) grouped.set(key, []);
+	grouped.get(key)!.push(post);
+}
+
+const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+---
+
+<!doctype html>
+<html lang="ru">
+	<head>
+		<BaseHead title={`Архив — ${SITE_TITLE}`} description="Все выпуски Биржевого Дэнди по месяцам" />
+		<style>
+			main {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+			}
+			h1 {
+				margin-bottom: 2rem;
+			}
+			h2 {
+				margin-top: 2rem;
+				margin-bottom: 0.5rem;
+				font-size: 1.2rem;
+				color: rgb(var(--gray));
+			}
+			.archive-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.archive-item {
+				display: flex;
+				align-items: baseline;
+				gap: 0.75rem;
+				padding: 0.4rem 0;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.archive-date {
+				flex-shrink: 0;
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+				font-variant-numeric: tabular-nums;
+				min-width: 4rem;
+			}
+			.archive-type {
+				flex-shrink: 0;
+				font-size: 0.9rem;
+			}
+			.archive-title a {
+				text-decoration: none;
+				color: rgb(var(--black));
+			}
+			.archive-title a:hover {
+				color: rgb(var(--accent));
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Архив</h1>
+			{[...grouped.entries()].map(([key, monthPosts]) => {
+				const [year, month] = key.split('-');
+				const label = `${monthNames[parseInt(month) - 1]} ${year}`;
+				return (
+					<section>
+						<h2>{label}</h2>
+						<ul class="archive-list">
+							{monthPosts.map((post) => {
+								const slug = post.id.includes('/') ? post.id.split('/').pop() : post.id;
+								const day = String(post.data.pubDate.getDate()).padStart(2, '0');
+								const mon = String(post.data.pubDate.getMonth() + 1).padStart(2, '0');
+								return (
+									<li class="archive-item">
+										<span class="archive-date">{day}.{mon}</span>
+										<span class="archive-type">{typeLabels[post.data.type] || post.data.type}</span>
+										<span class="archive-title">
+											<a href={`/blog/${slug}/`}>{post.data.title}</a>
+										</span>
+									</li>
+								);
+							})}
+						</ul>
+					</section>
+				);
+			})}
+		</main>
+		<Footer />
+	</body>
+</html>

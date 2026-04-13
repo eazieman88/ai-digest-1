@@ -1,0 +1,47 @@
+---
+---
+
+<div class="search-bar">
+	<input type="text" id="search-input" placeholder="Поиск по дайджестам..." autocomplete="off" />
+</div>
+
+<script>
+	const input = document.getElementById('search-input') as HTMLInputElement;
+	if (input) {
+		input.addEventListener('input', () => {
+			const query = input.value.toLowerCase().trim();
+			const items = document.querySelectorAll<HTMLLIElement>('ul li[data-title]');
+			items.forEach((item) => {
+				const title = item.dataset.title || '';
+				const description = item.dataset.description || '';
+				const tags = item.dataset.tags || '';
+				const match = !query || title.includes(query) || description.includes(query) || tags.includes(query);
+				item.style.display = match ? '' : 'none';
+			});
+		});
+	}
+</script>
+
+<style>
+	.search-bar {
+		margin-bottom: 1rem;
+	}
+	#search-input {
+		width: 100%;
+		padding: 0.6rem 1rem;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		font-size: 1rem;
+		font-family: inherit;
+		background: white;
+		color: rgb(var(--black));
+		outline: none;
+		transition: border-color 0.2s ease;
+	}
+	#search-input:focus {
+		border-color: rgb(var(--accent));
+	}
+	#search-input::placeholder {
+		color: rgb(var(--gray));
+	}
+</style>
