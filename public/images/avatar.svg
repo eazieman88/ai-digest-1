@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4b85a"/>
+      <stop offset="40%" stop-color="#8b7332"/>
+      <stop offset="70%" stop-color="#c9a94e"/>
+      <stop offset="100%" stop-color="#8b7332"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0e1a0e"/>
+
+  <!-- Shield -->
+  <path d="M256,30 L440,115 L440,310 Q440,440 256,498 Q72,440 72,310 L72,115 Z"
+        fill="#1b2a1b" stroke="url(#g)" stroke-width="8"/>
+
+  <!-- Top hat — brim -->
+  <ellipse cx="256" cy="205" rx="90" ry="14" fill="#0e1a0e" stroke="url(#g)" stroke-width="5"/>
+  <!-- Top hat — crown -->
+  <rect x="190" y="95" width="132" height="114" rx="4" fill="#0e1a0e" stroke="url(#g)" stroke-width="5"/>
+  <!-- Top hat — top -->
+  <ellipse cx="256" cy="98" rx="66" ry="10" fill="#0e1a0e" stroke="url(#g)" stroke-width="4"/>
+  <!-- Hat band -->
+  <rect x="190" y="178" width="132" height="16" fill="url(#g)" opacity="0.85"/>
+
+  <!-- Monogram БД -->
+  <g font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="bold" font-style="italic">
+    <text x="222" y="400" font-size="130" fill="url(#g)" opacity="0.9">Б</text>
+    <text x="290" y="400" font-size="130" fill="url(#g)" opacity="0.9">Д</text>
+  </g>
+</svg>

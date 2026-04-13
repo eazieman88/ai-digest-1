@@ -1,0 +1,280 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="hBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0f1a"/>
+      <stop offset="50%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0f0f1a"/>
+    </linearGradient>
+    <linearGradient id="hGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d76e"/>
+      <stop offset="35%" stop-color="#d4af37"/>
+      <stop offset="70%" stop-color="#c5a028"/>
+      <stop offset="100%" stop-color="#f5d76e"/>
+    </linearGradient>
+    <linearGradient id="hGoldFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d4af37" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#d4af37" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hGreenGlow" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#2ecc71" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#2ecc71" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="silhouetteGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0a0a15"/>
+    </linearGradient>
+    <filter id="hGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <clipPath id="frameClip">
+      <rect x="20" y="20" width="1160" height="590" rx="4"/>
+    </clipPath>
+    <pattern id="decoPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <polygon points="20,0 40,20 20,40 0,20" fill="none" stroke="#d4af37" stroke-width="0.3" opacity="0.15"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#hBg)"/>
+
+  <!-- Art Deco diamond pattern overlay -->
+  <rect width="1200" height="630" fill="url(#decoPattern)" clip-path="url(#frameClip)"/>
+
+  <!-- Art Deco frame -->
+  <rect x="24" y="24" width="1152" height="582" rx="2" fill="none" stroke="url(#hGold)" stroke-width="1.5" opacity="0.6"/>
+  <rect x="32" y="32" width="1136" height="566" rx="2" fill="none" stroke="url(#hGold)" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Corner ornaments -->
+  <g fill="url(#hGold)" opacity="0.7">
+    <!-- Top left -->
+    <polygon points="24,24 50,24 24,50"/>
+    <rect x="24" y="24" width="60" height="2"/>
+    <rect x="24" y="24" width="2" height="60"/>
+    <!-- Top right -->
+    <polygon points="1176,24 1150,24 1176,50"/>
+    <rect x="1116" y="24" width="60" height="2"/>
+    <rect x="1174" y="24" width="2" height="60"/>
+    <!-- Bottom left -->
+    <polygon points="24,606 50,606 24,580"/>
+    <rect x="24" y="604" width="60" height="2"/>
+    <rect x="24" y="546" width="2" height="60"/>
+    <!-- Bottom right -->
+    <polygon points="1176,606 1150,606 1176,580"/>
+    <rect x="1116" y="604" width="60" height="2"/>
+    <rect x="1174" y="546" width="2" height="60"/>
+  </g>
+
+  <!-- Grid lines (market background) -->
+  <g stroke="#d4af37" stroke-opacity="0.04" stroke-width="0.5" clip-path="url(#frameClip)">
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="350" y1="0" x2="350" y2="630"/>
+    <line x1="500" y1="0" x2="500" y2="630"/>
+    <line x1="650" y1="0" x2="650" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="950" y1="0" x2="950" y2="630"/>
+    <line x1="1100" y1="0" x2="1100" y2="630"/>
+    <line x1="0" y1="150" x2="1200" y2="150"/>
+    <line x1="0" y1="250" x2="1200" y2="250"/>
+    <line x1="0" y1="350" x2="1200" y2="350"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="550" x2="1200" y2="550"/>
+  </g>
+
+  <!-- ===== CANDLESTICK CHART (Background, right side) ===== -->
+  <g clip-path="url(#frameClip)" opacity="0.55">
+    <!-- Rising trend line -->
+    <polyline points="500,520 560,490 620,505 680,460 740,470 800,410 860,430 920,370 980,340 1040,300 1100,260"
+              fill="none" stroke="#2ecc71" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Area under trend -->
+    <path d="M500,520 L560,490 L620,505 L680,460 L740,470 L800,410 L860,430 L920,370 L980,340 L1040,300 L1100,260 L1100,580 L500,580 Z"
+          fill="url(#hGreenGlow)" opacity="0.4"/>
+
+    <!-- Candlesticks -->
+    <!-- Green (bullish) candles -->
+    <g>
+      <line x1="560" y1="480" x2="560" y2="500" stroke="#2ecc71" stroke-width="1"/>
+      <rect x="554" y="484" width="12" height="12" fill="#2ecc71" rx="1" opacity="0.8"/>
+
+      <line x1="680" y1="448" x2="680" y2="472" stroke="#2ecc71" stroke-width="1"/>
+      <rect x="674" y="452" width="12" height="14" fill="#2ecc71" rx="1" opacity="0.8"/>
+
+      <line x1="800" y1="398" x2="800" y2="422" stroke="#2ecc71" stroke-width="1"/>
+      <rect x="794" y="402" width="12" height="14" fill="#2ecc71" rx="1" opacity="0.8"/>
+
+      <line x1="920" y1="358" x2="920" y2="382" stroke="#2ecc71" stroke-width="1"/>
+      <rect x="914" y="362" width="12" height="14" fill="#2ecc71" rx="1" opacity="0.8"/>
+
+      <line x1="1040" y1="288" x2="1040" y2="312" stroke="#2ecc71" stroke-width="1"/>
+      <rect x="1034" y="292" width="12" height="14" fill="#2ecc71" rx="1" opacity="0.8"/>
+
+      <line x1="1100" y1="248" x2="1100" y2="272" stroke="#2ecc71" stroke-width="1"/>
+      <rect x="1094" y="252" width="12" height="14" fill="#2ecc71" rx="1" opacity="0.8"/>
+    </g>
+
+    <!-- Red (bearish) candles -->
+    <g>
+      <line x1="620" y1="494" x2="620" y2="518" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="614" y="500" width="12" height="12" fill="#e74c3c" rx="1" opacity="0.7"/>
+
+      <line x1="740" y1="458" x2="740" y2="482" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="734" y="464" width="12" height="12" fill="#e74c3c" rx="1" opacity="0.7"/>
+
+      <line x1="860" y1="418" x2="860" y2="442" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="854" y="424" width="12" height="12" fill="#e74c3c" rx="1" opacity="0.7"/>
+
+      <line x1="980" y1="328" x2="980" y2="352" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="974" y="334" width="12" height="12" fill="#e74c3c" rx="1" opacity="0.7"/>
+    </g>
+
+    <!-- Volume bars at bottom -->
+    <g opacity="0.25">
+      <rect x="554" y="555" width="12" height="20" fill="#2ecc71"/>
+      <rect x="614" y="560" width="12" height="15" fill="#e74c3c"/>
+      <rect x="674" y="548" width="12" height="27" fill="#2ecc71"/>
+      <rect x="734" y="558" width="12" height="17" fill="#e74c3c"/>
+      <rect x="794" y="545" width="12" height="30" fill="#2ecc71"/>
+      <rect x="854" y="555" width="12" height="20" fill="#e74c3c"/>
+      <rect x="914" y="540" width="12" height="35" fill="#2ecc71"/>
+      <rect x="974" y="552" width="12" height="23" fill="#e74c3c"/>
+      <rect x="1034" y="538" width="12" height="37" fill="#2ecc71"/>
+      <rect x="1094" y="542" width="12" height="33" fill="#2ecc71"/>
+    </g>
+  </g>
+
+  <!-- Ticker tape at top -->
+  <g fill="#d4af37" font-family="'Courier New', monospace" font-size="11" opacity="0.2" clip-path="url(#frameClip)">
+    <text x="60" y="58">ES 5420.50 ▲1.2%</text>
+    <text x="260" y="58">NQ 18950 ▲1.8%</text>
+    <text x="430" y="58">CL 72.40 ▼0.5%</text>
+    <text x="600" y="58">GC 2340 ▲0.3%</text>
+    <text x="760" y="58">BTC 68500 ▲2.1%</text>
+    <text x="950" y="58">EUR/USD 1.0845</text>
+  </g>
+
+  <!-- ===== DANDY SILHOUETTE (Left side) ===== -->
+  <g transform="translate(80, 30)">
+    <!-- Ambient glow behind silhouette -->
+    <ellipse cx="250" cy="350" rx="180" ry="250" fill="#d4af37" opacity="0.03" filter="url(#softGlow)"/>
+
+    <!-- === Full body silhouette === -->
+    <g fill="#0a0a15">
+
+      <!-- TOP HAT -->
+      <!-- Hat brim -->
+      <ellipse cx="250" cy="140" rx="75" ry="12" fill="#0a0a15"/>
+      <!-- Hat crown -->
+      <rect x="195" y="48" width="110" height="95" rx="4"/>
+      <!-- Hat top -->
+      <ellipse cx="250" cy="50" rx="55" ry="8"/>
+
+      <!-- Hat band (gold accent) -->
+      <rect x="195" y="118" width="110" height="14" fill="url(#hGold)" opacity="0.8"/>
+      <!-- Band Art Deco diamonds -->
+      <g fill="#1a1a2e" opacity="0.5">
+        <polygon points="210,125 215,119 220,125 215,131"/>
+        <polygon points="230,125 235,119 240,125 235,131"/>
+        <polygon points="250,125 255,119 260,125 255,131"/>
+        <polygon points="270,125 275,119 280,125 275,131"/>
+        <polygon points="290,125 295,119 300,125 295,131"/>
+      </g>
+
+      <!-- HEAD -->
+      <ellipse cx="250" cy="175" rx="38" ry="45"/>
+
+      <!-- MONOCLE (gold) -->
+      <circle cx="272" cy="170" r="14" fill="none" stroke="url(#hGold)" stroke-width="2" opacity="0.8"/>
+      <!-- Monocle chain -->
+      <path d="M 285,174 Q 310,200 290,250" fill="none" stroke="url(#hGold)" stroke-width="1" opacity="0.5"/>
+      <!-- Monocle glint -->
+      <circle cx="268" cy="166" r="3" fill="white" opacity="0.1"/>
+
+      <!-- NECK & COLLAR -->
+      <rect x="234" y="215" width="32" height="20"/>
+
+      <!-- BOW TIE (gold accent) -->
+      <g fill="url(#hGold)" opacity="0.7">
+        <polygon points="230,238 250,245 230,252"/>
+        <polygon points="270,238 250,245 270,252"/>
+        <circle cx="250" cy="245" r="4" fill="url(#hGold)"/>
+      </g>
+
+      <!-- TORSO — fitted jacket -->
+      <path d="M 195,240 Q 190,260 185,320 L 185,420 Q 185,435 200,440 L 210,440 L 220,380 L 250,385 L 280,380 L 290,440 L 300,440 Q 315,435 315,420 L 315,320 Q 310,260 305,240 Z"/>
+
+      <!-- Jacket lapels (V-shape, gold outline) -->
+      <path d="M 230,240 L 250,310 L 250,310 L 270,240" fill="none" stroke="url(#hGold)" stroke-width="1.5" opacity="0.4"/>
+      <!-- Breast pocket square (gold) -->
+      <path d="M 275,275 L 280,260 L 290,265 L 285,278 Z" fill="url(#hGold)" opacity="0.5"/>
+
+      <!-- LEFT ARM (holding cane) -->
+      <path d="M 185,260 Q 155,300 140,360 L 135,390 Q 130,400 135,410 L 145,410 Q 150,400 148,390 L 155,360 Q 165,310 185,280"/>
+
+      <!-- RIGHT ARM (in pocket / at side) -->
+      <path d="M 315,260 Q 340,300 350,360 L 352,400 Q 352,410 345,415 L 335,415 Q 332,410 334,400 L 332,360 Q 325,310 315,280"/>
+
+      <!-- TROUSERS -->
+      <path d="M 210,435 L 200,560 L 215,565 L 245,445 L 255,445 L 285,565 L 300,560 L 290,435 Z"/>
+
+      <!-- SHOES -->
+      <path d="M 195,558 Q 190,570 195,575 L 220,575 Q 225,572 220,565 Z"/>
+      <path d="M 280,565 Q 275,572 280,575 L 305,575 Q 310,570 305,558 Z"/>
+    </g>
+
+    <!-- WALKING CANE -->
+    <g>
+      <!-- Cane shaft -->
+      <line x1="138" y1="395" x2="118" y2="572" stroke="url(#hGold)" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- Cane handle (curved top) -->
+      <path d="M 138,395 Q 138,375 155,370 Q 165,368 168,378" fill="none" stroke="url(#hGold)" stroke-width="3.5" stroke-linecap="round"/>
+      <!-- Cane tip -->
+      <circle cx="117" cy="574" r="3" fill="url(#hGold)" opacity="0.6"/>
+    </g>
+
+    <!-- Hat shine -->
+    <rect x="210" y="60" width="25" height="45" rx="12" fill="white" opacity="0.03"/>
+  </g>
+
+  <!-- ===== TEXT BLOCK (Right side) ===== -->
+  <g>
+    <!-- Title -->
+    <text x="620" y="200" fill="url(#hGold)" font-family="Georgia, 'Times New Roman', serif"
+          font-size="64" font-weight="bold" letter-spacing="3" filter="url(#hGlow)">БИРЖЕВОЙ</text>
+    <text x="620" y="275" fill="url(#hGold)" font-family="Georgia, 'Times New Roman', serif"
+          font-size="64" font-weight="bold" letter-spacing="3" filter="url(#hGlow)">ДЭНДИ</text>
+
+    <!-- Decorative line -->
+    <line x1="620" y1="295" x2="920" y2="295" stroke="url(#hGold)" stroke-width="1.5" opacity="0.5"/>
+    <polygon points="920,295 928,290 936,295 928,300" fill="url(#hGold)" opacity="0.5"/>
+    <polygon points="612,295 620,290 620,295 612,295" fill="url(#hGold)" opacity="0.5"/>
+
+    <!-- Subtitle -->
+    <text x="620" y="330" fill="#d4af37" font-family="Georgia, 'Times New Roman', serif"
+          font-size="18" letter-spacing="6" opacity="0.5">BOURSE DANDY</text>
+
+    <!-- Tagline -->
+    <text x="620" y="380" fill="white" font-family="Georgia, 'Times New Roman', serif"
+          font-size="20" opacity="0.6">Элегантно о рынках</text>
+
+    <!-- Tags -->
+    <g fill="white" font-family="'Courier New', monospace" font-size="13" opacity="0.35">
+      <text x="620" y="430">Order Flow · Volume Profile · Макро</text>
+      <text x="620" y="455">Акции · Фьючерсы · Крипта · Forex</text>
+    </g>
+  </g>
+
+  <!-- Bottom Art Deco decorative band -->
+  <g opacity="0.3" clip-path="url(#frameClip)">
+    <line x1="60" y1="590" x2="1140" y2="590" stroke="url(#hGold)" stroke-width="0.5"/>
+    <!-- Small Art Deco motifs -->
+    <g fill="url(#hGold)" opacity="0.5">
+      <polygon points="590,590 600,580 610,590"/>
+      <polygon points="570,590 575,584 580,590"/>
+      <polygon points="620,590 625,584 630,590"/>
+    </g>
+  </g>
+</svg>

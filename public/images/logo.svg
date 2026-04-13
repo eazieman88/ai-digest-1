@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="goldSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5d76e"/>
+      <stop offset="35%" stop-color="#d4af37"/>
+      <stop offset="65%" stop-color="#c5a028"/>
+      <stop offset="100%" stop-color="#f5d76e"/>
+    </linearGradient>
+    <linearGradient id="darkBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0f0f1a"/>
+    </linearGradient>
+    <linearGradient id="chartGreen" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#2ecc71" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#2ecc71" stop-opacity="0.6"/>
+    </linearGradient>
+    <clipPath id="circleClip">
+      <circle cx="256" cy="256" r="240"/>
+    </clipPath>
+    <filter id="goldGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="url(#darkBg)"/>
+
+  <!-- Art Deco outer ring -->
+  <circle cx="256" cy="256" r="248" fill="none" stroke="url(#goldSheen)" stroke-width="2.5"/>
+  <circle cx="256" cy="256" r="238" fill="none" stroke="url(#goldSheen)" stroke-width="0.8"/>
+
+  <!-- Art Deco corner ornaments (diamond shapes at cardinal points) -->
+  <g fill="url(#goldSheen)" opacity="0.7">
+    <polygon points="256,12 262,24 256,36 250,24"/>
+    <polygon points="256,476 262,488 256,500 250,488"/>
+    <polygon points="12,256 24,250 36,256 24,262"/>
+    <polygon points="476,256 488,250 500,256 488,262"/>
+  </g>
+
+  <!-- Subtle grid lines (market background) -->
+  <g stroke="#d4af37" stroke-opacity="0.06" stroke-width="0.5" clip-path="url(#circleClip)">
+    <line x1="80" y1="0" x2="80" y2="512"/>
+    <line x1="160" y1="0" x2="160" y2="512"/>
+    <line x1="240" y1="0" x2="240" y2="512"/>
+    <line x1="320" y1="0" x2="320" y2="512"/>
+    <line x1="400" y1="0" x2="400" y2="512"/>
+    <line x1="0" y1="200" x2="512" y2="200"/>
+    <line x1="0" y1="280" x2="512" y2="280"/>
+    <line x1="0" y1="360" x2="512" y2="360"/>
+  </g>
+
+  <!-- Rising chart line behind hat -->
+  <g clip-path="url(#circleClip)">
+    <!-- Chart area fill -->
+    <path d="M60,400 L130,370 L190,385 L240,340 L290,350 L330,290 L370,310 L410,240 L450,200 L450,420 L60,420 Z"
+          fill="url(#chartGreen)" opacity="0.3"/>
+    <!-- Chart line -->
+    <polyline points="60,400 130,370 190,385 240,340 290,350 330,290 370,310 410,240 450,200"
+              fill="none" stroke="#2ecc71" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+    <!-- Candles -->
+    <g opacity="0.5">
+      <!-- Green candles -->
+      <line x1="130" y1="360" x2="130" y2="380" stroke="#2ecc71" stroke-width="1"/>
+      <rect x="126" y="365" width="8" height="10" fill="#2ecc71" rx="1"/>
+
+      <line x1="290" y1="340" x2="290" y2="360" stroke="#2ecc71" stroke-width="1"/>
+      <rect x="286" y="344" width="8" height="10" fill="#2ecc71" rx="1"/>
+
+      <line x1="410" y1="230" x2="410" y2="250" stroke="#2ecc71" stroke-width="1"/>
+      <rect x="406" y="234" width="8" height="10" fill="#2ecc71" rx="1"/>
+
+      <!-- Red candles -->
+      <line x1="190" y1="375" x2="190" y2="395" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="186" y="380" width="8" height="10" fill="#e74c3c" rx="1"/>
+
+      <line x1="370" y1="300" x2="370" y2="320" stroke="#e74c3c" stroke-width="1"/>
+      <rect x="366" y="305" width="8" height="10" fill="#e74c3c" rx="1"/>
+    </g>
+  </g>
+
+  <!-- TOP HAT — main element -->
+  <g filter="url(#goldGlow)">
+    <!-- Hat brim shadow -->
+    <ellipse cx="256" cy="270" rx="120" ry="18" fill="#0a0a15" opacity="0.4"/>
+
+    <!-- Hat brim -->
+    <ellipse cx="256" cy="262" rx="115" ry="16" fill="url(#goldSheen)"/>
+    <ellipse cx="256" cy="262" rx="115" ry="16" fill="none" stroke="#f5d76e" stroke-width="1" opacity="0.5"/>
+
+    <!-- Hat crown -->
+    <rect x="178" y="140" width="156" height="124" rx="6" fill="#1a1a2e" stroke="url(#goldSheen)" stroke-width="2.5"/>
+
+    <!-- Hat crown top -->
+    <ellipse cx="256" cy="142" rx="78" ry="12" fill="#1a1a2e" stroke="url(#goldSheen)" stroke-width="2"/>
+
+    <!-- Hat band — Art Deco pattern -->
+    <rect x="178" y="232" width="156" height="22" fill="url(#goldSheen)"/>
+    <!-- Band detail: repeating diamond pattern -->
+    <g fill="#1a1a2e" opacity="0.4">
+      <polygon points="190,243 196,236 202,243 196,250"/>
+      <polygon points="210,243 216,236 222,243 216,250"/>
+      <polygon points="230,243 236,236 242,243 236,250"/>
+      <polygon points="250,243 256,236 262,243 256,250"/>
+      <polygon points="270,243 276,236 282,243 276,250"/>
+      <polygon points="290,243 296,236 302,243 296,250"/>
+      <polygon points="310,243 316,236 322,243 316,250"/>
+    </g>
+
+    <!-- Hat shine highlight -->
+    <rect x="200" y="155" width="40" height="65" rx="20" fill="white" opacity="0.04"/>
+  </g>
+
+  <!-- Monogram "BD" below hat -->
+  <g fill="url(#goldSheen)" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" text-anchor="middle">
+    <text x="256" y="340" font-size="48" letter-spacing="8" opacity="0.9">BD</text>
+  </g>
+
+  <!-- Decorative line under monogram -->
+  <line x1="200" y1="355" x2="312" y2="355" stroke="url(#goldSheen)" stroke-width="1.2" opacity="0.5"/>
+  <circle cx="200" cy="355" r="2" fill="url(#goldSheen)" opacity="0.5"/>
+  <circle cx="312" cy="355" r="2" fill="url(#goldSheen)" opacity="0.5"/>
+
+  <!-- Subtitle -->
+  <text x="256" y="390" fill="url(#goldSheen)" font-family="Georgia, 'Times New Roman', serif"
+        font-size="18" text-anchor="middle" letter-spacing="6" opacity="0.6">BOURSE DANDY</text>
+</svg>

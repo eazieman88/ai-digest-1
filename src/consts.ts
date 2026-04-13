@@ -1,2 +1,2 @@
-export const SITE_TITLE = 'AI Digest';
-export const SITE_DESCRIPTION = 'Автоматический дайджест новостей AI, машинного обучения и больших языковых моделей.';
+export const SITE_TITLE = 'Биржевой Дэнди';
+export const SITE_DESCRIPTION = 'Биржевой Дэнди — финансовый дайджест для трейдеров и инвесторов. Order flow, volume profile, макроаналитика. Акции, фьючерсы, крипта, forex, commodities. Ежедневные обзоры рынков.';

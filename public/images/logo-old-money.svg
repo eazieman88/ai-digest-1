@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="omBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1b2a1b"/>
+      <stop offset="100%" stop-color="#0e1a0e"/>
+    </linearGradient>
+    <linearGradient id="omGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c9a94e"/>
+      <stop offset="30%" stop-color="#8b7332"/>
+      <stop offset="60%" stop-color="#c9a94e"/>
+      <stop offset="100%" stop-color="#7a6428"/>
+    </linearGradient>
+    <linearGradient id="omCream" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5f0e1"/>
+      <stop offset="100%" stop-color="#d4c9a8"/>
+    </linearGradient>
+    <filter id="omEngrave">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
+      <feComposite in="SourceGraphic" in2="noise" operator="in" result="engraved"/>
+      <feBlend in="SourceGraphic" in2="engraved" mode="multiply"/>
+    </filter>
+    <filter id="omShadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <clipPath id="omShield">
+      <path d="M256,40 L420,110 L420,300 Q420,420 256,480 Q92,420 92,300 L92,110 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0e1a0e"/>
+
+  <!-- Shield shape — the crest -->
+  <path d="M256,40 L420,110 L420,300 Q420,420 256,480 Q92,420 92,300 L92,110 Z"
+        fill="url(#omBg)" stroke="url(#omGold)" stroke-width="3"/>
+
+  <!-- Inner shield border -->
+  <path d="M256,56 L406,120 L406,296 Q406,408 256,464 Q106,408 106,296 L106,120 Z"
+        fill="none" stroke="url(#omGold)" stroke-width="1" opacity="0.4"/>
+
+  <!-- Horizontal divider line -->
+  <line x1="120" y1="260" x2="392" y2="260" stroke="url(#omGold)" stroke-width="1" opacity="0.3"/>
+
+  <!-- Subtle herringbone pattern in shield -->
+  <g clip-path="url(#omShield)" opacity="0.03" stroke="#c9a94e" stroke-width="0.5" fill="none">
+    <path d="M0,80 L40,120 L0,160"/>
+    <path d="M40,80 L80,120 L40,160"/>
+    <path d="M80,80 L120,120 L80,160"/>
+    <path d="M120,80 L160,120 L120,160"/>
+    <path d="M160,80 L200,120 L160,160"/>
+    <path d="M200,80 L240,120 L200,160"/>
+    <path d="M240,80 L280,120 L240,160"/>
+    <path d="M280,80 L320,120 L280,160"/>
+    <path d="M320,80 L360,120 L320,160"/>
+    <path d="M360,80 L400,120 L360,160"/>
+    <path d="M400,80 L440,120 L400,160"/>
+    <path d="M440,80 L480,120 L440,160"/>
+    <path d="M0,160 L40,200 L0,240"/>
+    <path d="M40,160 L80,200 L40,240"/>
+    <path d="M80,160 L120,200 L80,240"/>
+    <path d="M120,160 L160,200 L120,240"/>
+    <path d="M160,160 L200,200 L160,240"/>
+    <path d="M200,160 L240,200 L200,240"/>
+    <path d="M240,160 L280,200 L240,240"/>
+    <path d="M280,160 L320,200 L280,240"/>
+    <path d="M320,160 L360,200 L320,240"/>
+    <path d="M360,160 L400,200 L360,240"/>
+    <path d="M400,160 L440,200 L400,240"/>
+    <path d="M0,240 L40,280 L0,320"/>
+    <path d="M40,240 L80,280 L40,320"/>
+    <path d="M80,240 L120,280 L80,320"/>
+    <path d="M120,240 L160,280 L120,320"/>
+    <path d="M160,240 L200,280 L160,320"/>
+    <path d="M200,240 L240,280 L200,320"/>
+    <path d="M240,240 L280,280 L240,320"/>
+    <path d="M280,240 L320,280 L280,320"/>
+    <path d="M320,240 L360,280 L320,320"/>
+    <path d="M360,240 L400,280 L360,320"/>
+    <path d="M400,240 L440,280 L400,320"/>
+    <path d="M0,320 L40,360 L0,400"/>
+    <path d="M40,320 L80,360 L40,400"/>
+    <path d="M80,320 L120,360 L80,400"/>
+    <path d="M120,320 L160,360 L120,400"/>
+    <path d="M160,320 L200,360 L160,400"/>
+    <path d="M200,320 L240,360 L200,400"/>
+    <path d="M240,320 L280,360 L240,400"/>
+    <path d="M280,320 L320,360 L280,400"/>
+    <path d="M320,320 L360,360 L320,400"/>
+    <path d="M360,320 L400,360 L360,400"/>
+  </g>
+
+  <!-- TOP HAT (upper half of shield) -->
+  <g filter="url(#omShadow)">
+    <!-- Brim -->
+    <ellipse cx="256" cy="215" rx="95" ry="13" fill="#1b2a1b" stroke="url(#omGold)" stroke-width="1.5"/>
+    <!-- Crown -->
+    <rect x="190" y="110" width="132" height="108" rx="3" fill="#1b2a1b" stroke="url(#omGold)" stroke-width="1.5"/>
+    <!-- Crown top -->
+    <ellipse cx="256" cy="112" rx="66" ry="9" fill="#1b2a1b" stroke="url(#omGold)" stroke-width="1.2"/>
+    <!-- Hat band — simple, refined -->
+    <rect x="190" y="192" width="132" height="12" fill="url(#omGold)" opacity="0.6"/>
+    <!-- Single thin line accent on band -->
+    <line x1="190" y1="198" x2="322" y2="198" stroke="#0e1a0e" stroke-width="0.8" opacity="0.4"/>
+  </g>
+
+  <!-- Crossed candlestick chart lines behind monogram -->
+  <g clip-path="url(#omShield)" opacity="0.15">
+    <!-- Left rising line (green) -->
+    <polyline points="130,380 170,360 210,370 250,340 290,320"
+              fill="none" stroke="#5a8a5a" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Right falling line (burgundy) -->
+    <polyline points="220,320 260,340 300,330 340,360 380,380"
+              fill="none" stroke="#8a5a5a" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Monogram — engraved serif style -->
+  <g font-family="Georgia, 'Palatino Linotype', 'Book Antiqua', Palatino, serif" text-anchor="middle" filter="url(#omShadow)">
+    <!-- Large B and D intertwined -->
+    <text x="232" y="370" font-size="82" font-weight="bold" fill="url(#omGold)" opacity="0.85"
+          font-style="italic">B</text>
+    <text x="280" y="370" font-size="82" font-weight="bold" fill="url(#omGold)" opacity="0.85"
+          font-style="italic">D</text>
+    <!-- Thin separator dot -->
+    <circle cx="256" cy="345" r="2.5" fill="url(#omGold)" opacity="0.5"/>
+  </g>
+
+  <!-- EST. line -->
+  <text x="256" y="410" fill="url(#omGold)" font-family="Georgia, 'Palatino Linotype', serif"
+        font-size="11" text-anchor="middle" letter-spacing="4" opacity="0.4">— EST. MMXXVI —</text>
+
+  <!-- BOURSE DANDY at bottom of shield -->
+  <text x="256" y="444" fill="url(#omGold)" font-family="Georgia, 'Palatino Linotype', serif"
+        font-size="14" text-anchor="middle" letter-spacing="5" opacity="0.5">BOURSE DANDY</text>
+
+  <!-- Laurel branches flanking the shield -->
+  <!-- Left laurel -->
+  <g fill="none" stroke="url(#omGold)" stroke-width="1.2" opacity="0.35">
+    <path d="M88,300 Q60,260 70,200 Q65,180 72,160"/>
+    <!-- Leaves left -->
+    <path d="M74,190 Q58,185 55,170" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M78,210 Q60,208 54,195" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M82,230 Q64,230 56,218" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M85,250 Q68,252 58,242" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M87,270 Q72,274 62,266" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M88,290 Q74,296 66,288" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+  </g>
+  <!-- Right laurel -->
+  <g fill="none" stroke="url(#omGold)" stroke-width="1.2" opacity="0.35">
+    <path d="M424,300 Q452,260 442,200 Q447,180 440,160"/>
+    <!-- Leaves right -->
+    <path d="M438,190 Q454,185 457,170" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M434,210 Q452,208 458,195" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M430,230 Q448,230 456,218" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M427,250 Q444,252 454,242" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M425,270 Q440,274 450,266" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+    <path d="M424,290 Q438,296 446,288" fill="url(#omGold)" fill-opacity="0.15" stroke-width="0.8"/>
+  </g>
+</svg>
